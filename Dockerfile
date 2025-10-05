@@ -11,8 +11,8 @@ ENV PATH="/opt/venv/bin:$PATH"
 RUN pip install --upgrade pip
 
 # Set the Python-related environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 # Install os dependencies for our mini vm
 RUN apt-get update && apt-get install -y \
@@ -43,7 +43,7 @@ COPY ./src /code
 RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
 # make the bash script executable
-COPY .boot/docker-run.sh /opt/run.sh
+COPY ./boot/docker_run.sh /opt/run.sh
 RUN chmod +x /opt/run.sh
 
 # Clean up apt cache to reduce image size
